@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Wizard view-->
+        <record  model="ir.ui.view" id="project_task_cancel_wizard_view">
+            <field name="name">Wizard Cancelar Tarea</field>
+            <field name="model">project.task.cancel</field>
+            <field name="arch" type="xml">
+                <form string="Wizard Cancelar Tarea">
+                    <group>
+                        <field name="cancelation_note"/>
+                    </group>
+                    <footer>
+                        <button name="cancelar_tarea" string="Confirmar" type="object" class="oe_highlight"/>
+                        <button string="Close" special="cancel" class="btn-primary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="act_project_project_2_project_task_all_director" model="ir.actions.act_window">
+            <field name="name">Tasks Director</field>
+            <field name="res_model">project.task</field>
+            <field name="view_mode">kanban,tree,form,calendar,pivot,graph,activity</field>
+            <field name="context">{
+                'search_default_project_id': [active_id],
+                'default_project_id': active_id,
+            }</field>
+            <field name="search_view_id" ref="project.view_task_search_form"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Click <i>Create</i> to start a new task.
+                </p><p>
+                    To get things done, use activities and status on tasks.<br/>
+                    Chat in real time or by email to collaborate efficiently.
+                </p>
+            </field>
+        </record>
+
+        <record id="custom_dryrefor_view" model="ir.ui.view">
+            <field name="name">project.task.paid.view</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_tree2"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='stage_id']" position="before">
+                    <field name="es_pagado" widget="badge" decoration-danger="es_pagado == 'inpagado'" decoration-success="es_pagado == 'pagado'" string="Pagado"/>
+	            </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_project_kanban">
+            <field name="name">project.project.kanban</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project_kanban"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('o_project_kanban_boxes')]" position="replace">
+                    <div class="o_project_kanban_boxes">
+                        <a class="o_project_kanban_box" name="%(act_project_project_2_project_task_all_director)d" type="action" groups="project.group_project_manager">
+                            <div>
+                                <span class="o_value"><t t-esc="record.task_count.value"/></span>
+                                <span class="o_label"><t t-esc="record.label_tasks.value"/></span>
+                            </div>
+                        </a>
+                        <a class="o_project_kanban_box" name="%(project.act_project_project_2_project_task_all)d" type="action" groups="project.group_project_user">
+                            <div>
+                                <span class="o_value"><t t-esc="record.task_count.value"/></span>
+                                <span class="o_label"><t t-esc="record.label_tasks.value"/></span>
+                            </div>
+                        </a>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="custom_dryrefor_task_form_view" model="ir.ui.view">
+            <field name="name">project.task.paid.task.form.view</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_assign_to_me']" position="after">
+                    <button name="action_toggle_paid" string="Cambiar estado de pago" type="object" groups="project.group_project_manager"/>
+                    <button name="cancelar_tarea_wiz" string="Cancelar Tarea" type="object" class="oe_highlight" style="background: #f34e4e; border: black;" groups="project.group_project_manager"/>
+	            </xpath>
+                <xpath expr="//field[@name='stage_id']" position="after">
+                    <field name="es_pagado" widget="statusbar"/>
+                </xpath>
+                <xpath expr="//field[@name='date_last_stage_update']" position="after">
+                    <field name="cancelation_note"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_view_task_director" model="ir.actions.act_window">
+            <field name="name">Director de proyectos</field>
+            <field name="res_model">project.task</field>
+            <field name="view_mode">kanban,tree,form,calendar,pivot,graph,activity</field>
+            <field name="search_view_id" ref="project.view_task_search_form"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new task
+                </p><p>
+                    Odoo's project management allows you to manage the pipeline of your tasks efficiently.<br/>
+                    You can track progress, discuss on tasks, attach documents, etc.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Todas las tareas global" id="menu_project_management_director" parent="project.menu_main_pm"
+            action="action_view_task_director" sequence="2" groups="project.group_project_manager"/>
+
+        <record id="project.action_view_task" model="ir.actions.act_window">
+            <field name="domain">[('user_id','=',uid)]</field>
+        </record>
+
+        <record id="project.act_project_project_2_project_task_all" model="ir.actions.act_window">
+            <field name="domain">[('user_id','=',uid)]</field>
+        </record>
+
+    </data>
+</odoo>
