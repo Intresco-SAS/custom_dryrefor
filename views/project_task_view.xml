@@ -3,7 +3,7 @@
     <data>
 
         <record id="act_project_project_2_project_task_all_director" model="ir.actions.act_window">
-            <field name="name">Tasks Director</field>
+            <field name="name">Tareas del Director</field>
             <field name="res_model">project.task</field>
             <field name="view_mode">kanban,tree,form,calendar,pivot,graph,activity</field>
             <field name="context">{
@@ -13,10 +13,10 @@
             <field name="search_view_id" ref="project.view_task_search_form"/>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
-                    Click <i>Create</i> to start a new task.
+                    No hay Tareas. Crea una Tarea!
                 </p><p>
-                    To get things done, use activities and status on tasks.<br/>
-                    Chat in real time or by email to collaborate efficiently.
+                    Para gestionar su proyecto, utilice las actividades y el estado de las tareas.<br/>
+                    Chatea en tiempo real o por correo electrónico para colaborar de manera eficiente.
                 </p>
             </field>
         </record>
@@ -87,8 +87,12 @@
             </field>
         </record>
 
-        <menuitem name="Todas las Tareas" id="menu_project_management_director" parent="project.menu_main_pm"
-            action="action_view_task_director" sequence="2" groups="project.group_project_manager"/>
+        <menuitem id="menu_project_management_director" 
+                  name="Todas las Tareas" 
+                  parent="project.menu_main_pm"
+                  action="action_view_task_director" 
+                  sequence="2" 
+                  groups="project.group_project_manager"/>
 
         <record id="project.action_view_task" model="ir.actions.act_window">
             <field name="domain">[('user_id','=',uid)]</field>
