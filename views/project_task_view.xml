@@ -37,21 +37,19 @@
             <field name="model">project.project</field>
             <field name="inherit_id" ref="project.view_project_kanban"></field>
             <field name="arch" type="xml">
-                <xpath expr="//div[hasclass('o_project_kanban_boxes')]" position="replace">
-                    <div class="o_project_kanban_boxes">
-                        <a class="o_project_kanban_box" name="%(act_project_project_2_project_task_all_director)d" type="action" groups="project.group_project_manager">
-                            <div>
-                                <span class="o_value"><t t-esc="record.task_count.value"/></span>
-                                <span class="o_label"><t t-esc="record.label_tasks.value"/></span>
-                            </div>
-                        </a>
-                        <a class="o_project_kanban_box" name="%(project.act_project_project_2_project_task_all)d" type="action" groups="project.group_project_user">
-                            <div>
-                                <span class="o_value"><t t-esc="record.task_count.value"/></span>
-                                <span class="o_label"><t t-esc="record.label_tasks.value"/></span>
-                            </div>
-                        </a>
-                    </div>
+                <xpath expr="//div/a[@name='action_view_tasks']" position="replace">
+                    <a class="o_project_kanban_box" name="%(act_project_project_2_project_task_all_director)d" type="action" groups="project.group_project_manager">
+                        <div>
+                            <span class="o_value"><t t-esc="record.task_count.value"/></span>
+                            <span class="o_label"><t t-esc="record.label_tasks.value"/></span>
+                        </div>
+                    </a>
+                    <a class="o_project_kanban_box" name="%(project.act_project_project_2_project_task_all)d" type="action" groups="project.group_project_user">
+                        <div>
+                            <span class="o_value"><t t-esc="record.task_count.value"/></span>
+                            <span class="o_label"><t t-esc="record.label_tasks.value"/></span>
+                        </div>
+                    </a>
                 </xpath>
             </field>
         </record>
