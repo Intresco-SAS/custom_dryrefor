@@ -32,6 +32,24 @@
             </field>
         </record>
 
+        <record id="custom_dryrefor_task_form_view" model="ir.ui.view">
+            <field name="name">project.task.paid.task.form.view</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_assign_to_me']" position="after">
+                    <button name="action_toggle_paid" string="Cambiar estado de pago" type="object" groups="project.group_project_manager"/>
+                    <button name="cancelar_tarea_wiz" string="Cancelar Tarea" type="object" class="oe_highlight" style="background: #f34e4e; border: black;" groups="project.group_project_manager"/>
+	            </xpath>
+                <xpath expr="//field[@name='stage_id']" position="after">
+                    <field name="es_pagado" widget="statusbar"/>
+                </xpath>
+                <xpath expr="//field[@name='date_last_stage_update']" position="after">
+                    <field name="cancelation_note"/>
+                </xpath>
+            </field>
+        </record>
+
         <record model="ir.ui.view" id="view_project_kanban">
             <field name="name">project.project.kanban</field>
             <field name="model">project.project</field>
@@ -54,24 +72,6 @@
             </field>
         </record>
 
-        <record id="custom_dryrefor_task_form_view" model="ir.ui.view">
-            <field name="name">project.task.paid.task.form.view</field>
-            <field name="model">project.task</field>
-            <field name="inherit_id" ref="project.view_task_form2"></field>
-            <field name="arch" type="xml">
-                <xpath expr="//button[@name='action_assign_to_me']" position="after">
-                    <button name="action_toggle_paid" string="Cambiar estado de pago" type="object" groups="project.group_project_manager"/>
-                    <button name="cancelar_tarea_wiz" string="Cancelar Tarea" type="object" class="oe_highlight" style="background: #f34e4e; border: black;" groups="project.group_project_manager"/>
-	            </xpath>
-                <xpath expr="//field[@name='stage_id']" position="after">
-                    <field name="es_pagado" widget="statusbar"/>
-                </xpath>
-                <xpath expr="//field[@name='date_last_stage_update']" position="after">
-                    <field name="cancelation_note"/>
-                </xpath>
-            </field>
-        </record>
-
         <record id="action_view_task_director" model="ir.actions.act_window">
             <field name="name">Director de proyectos</field>
             <field name="res_model">project.task</field>
@@ -87,7 +87,7 @@
             </field>
         </record>
 
-        <menuitem name="Todas las tareas global" id="menu_project_management_director" parent="project.menu_main_pm"
+        <menuitem name="Todas las Tareas" id="menu_project_management_director" parent="project.menu_main_pm"
             action="action_view_task_director" sequence="2" groups="project.group_project_manager"/>
 
         <record id="project.action_view_task" model="ir.actions.act_window">
