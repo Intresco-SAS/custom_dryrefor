@@ -12,8 +12,7 @@ Also it adds a new view for project user group, to see only his tasks
     """,
     'depends': [
         'project', 
-        #'deltatech_widget_badge', 
-        #'l10n_co_res_partner'
+        'project_task_code',
     ],
     'data': [
         'security/ir.model.access.csv',

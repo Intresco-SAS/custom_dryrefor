@@ -108,5 +108,19 @@
             <field name="domain">[('display_project_id', '=', active_id), ('user_ids','in',uid)]</field>
         </record>
 
+        <record id="project_task_code_kanban_view_int" model="ir.ui.view">
+            <field name="name">project.task.code.kanban</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_kanban" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='o_kanban_record_headings']/strong[@class='o_kanban_record_title']" position="replace">
+                    <strong class="o_kanban_record_title">
+                        <s t-if="!record.active.raw_value"><field name="code"/>-<field name="name" widget="name_with_subtask_count"/></s>
+                        <t t-else=""><field name="code"/>-<field name="name" widget="name_with_subtask_count"/></t>
+                    </strong>
+                </xpath>
+            </field>
+        </record>
+
     </data>
 </odoo>
